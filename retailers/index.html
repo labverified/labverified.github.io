@@ -27,7 +27,9 @@
   .brand .bh{background:#111114;color:#fff;padding:13px 18px;display:flex;justify-content:space-between;align-items:baseline}
   .brand .bh .bn{font-size:20px;font-weight:900;letter-spacing:.01em}
   .brand .bh .bt{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#a8d8bd}
-  .prow{padding:13px 18px;border-bottom:1px solid var(--line)}
+  .prow{display:flex;align-items:center;gap:13px;padding:12px 18px;border-bottom:1px solid var(--line)}
+  .prow .pimg{flex:0 0 auto;width:50px;height:66px;object-fit:contain}
+  .prow .pinfo{flex:1;min-width:0}
   .prow:last-child{border-bottom:none}
   .prow .pn{font-size:16px;font-weight:800}
   .prow .pn small{display:block;font-size:12.5px;color:var(--mid);font-weight:600;margin-top:2px}
@@ -72,24 +74,24 @@
     <div class="sec">
       <div class="brand">
         <div class="bh"><span class="bn">LIT Culture</span><span class="bt">Highest potency · 50%</span></div>
-        <div class="prow"><div class="pn">Watermelon 190<small>201mg mitragynine, lab-verified · 15ml</small></div><div class="nums"><span class="c">Cost $6.00 → Retail $11.99</span><span class="mk">+$5.99 · 50%</span></div></div>
-        <div class="prow"><div class="pn">Butterscotch 110<small>123mg lab-verified · 15ml</small></div><div class="nums"><span class="c">Cost $4.50 → Retail $8.99</span><span class="mk">+$4.49 · 50%</span></div></div>
-        <div class="prow"><div class="pn">Black Honey / Fireside 80<small>~84mg lab-verified · 15ml</small></div><div class="nums"><span class="c">Cost $3.50 → Retail $6.99</span><span class="mk">+$3.49 · 50%</span></div></div>
+        <div class="prow"><img class="pimg" src="../img/lit-watermelon.png" alt=""><div class="pinfo"><div class="pn">Watermelon 190<small>201mg mitragynine, lab-verified · 15ml</small></div><div class="nums"><span class="c">Cost $6.00 → Retail $11.99</span><span class="mk">+$5.99 · 50%</span></div></div></div>
+        <div class="prow"><img class="pimg" src="../img/lit-butterscotch.png" alt=""><div class="pinfo"><div class="pn">Butterscotch 110<small>123mg lab-verified · 15ml</small></div><div class="nums"><span class="c">Cost $4.50 → Retail $8.99</span><span class="mk">+$4.49 · 50%</span></div></div></div>
+        <div class="prow"><img class="pimg" src="../img/lit-blackhoney.png" alt=""><div class="pinfo"><div class="pn">Black Honey / Fireside 80<small>~84mg lab-verified · 15ml</small></div><div class="nums"><span class="c">Cost $3.50 → Retail $6.99</span><span class="mk">+$3.49 · 50%</span></div></div></div>
         <div class="note">✓ Accredited Cambium COA · no added 7-OH · highest verified potency in the category</div>
       </div>
 
       <div class="brand">
         <div class="bh"><span class="bn">Chant Life</span><span class="bt">Buy 1 Get 1 · 50%</span></div>
-        <div class="prow"><div class="pn">Platinum 150<small>Full-spectrum extract · 15ml</small></div><div class="nums"><span class="c">Cost $10.00 → Retail $19.99</span><span class="mk">+$9.99 · 50%</span></div></div>
-        <div class="prow"><div class="pn">Gold 125<small>Full-spectrum extract · 15ml</small></div><div class="nums"><span class="c">Cost $9.00 → Retail $17.99</span><span class="mk">+$8.99 · 50%</span></div></div>
-        <div class="prow"><div class="pn">Original 100<small>Full-spectrum extract · 15ml</small></div><div class="nums"><span class="c">Cost $8.00 → Retail $15.99</span><span class="mk">+$7.99 · 50%</span></div></div>
+        <div class="prow"><img class="pimg" src="../img/chant-platinum.png" alt=""><div class="pinfo"><div class="pn">Platinum 150<small>Full-spectrum extract · 15ml</small></div><div class="nums"><span class="c">Cost $10.00 → Retail $19.99</span><span class="mk">+$9.99 · 50%</span></div></div></div>
+        <div class="prow"><img class="pimg" src="../img/chant-gold.png" alt=""><div class="pinfo"><div class="pn">Gold 125<small>Full-spectrum extract · 15ml</small></div><div class="nums"><span class="c">Cost $9.00 → Retail $17.99</span><span class="mk">+$8.99 · 50%</span></div></div></div>
+        <div class="prow"><img class="pimg" src="../img/chant-original.png" alt=""><div class="pinfo"><div class="pn">Original 100<small>Full-spectrum extract · 15ml</small></div><div class="nums"><span class="c">Cost $8.00 → Retail $15.99</span><span class="mk">+$7.99 · 50%</span></div></div></div>
         <div class="note">✓ Built-in Buy 1 Get 1 Free promo · accredited COA · no added 7-OH</div>
       </div>
 
       <div class="brand">
         <div class="bh"><span class="bn">LFG</span><span class="bt">Best value · 50%+</span></div>
-        <div class="prow"><div class="pn">Strawberry Watermelon<small>2 fl oz · undercuts Feel Free</small></div><div class="nums"><span class="c">Cost $3.92 → Retail $8.99</span><span class="mk">+$5.07 · 56%</span></div></div>
-        <div class="prow"><div class="pn">Cinnamon<small>A full 200mg extract · 0.5 fl oz</small></div><div class="nums"><span class="c">Cost $6.75 → Retail $13.99</span><span class="mk">+$7.24 · 52%</span></div></div>
+        <div class="prow"><img class="pimg" src="../img/lfg-sw.png" alt=""><div class="pinfo"><div class="pn">Strawberry Watermelon<small>2 fl oz · undercuts Feel Free</small></div><div class="nums"><span class="c">Cost $3.92 → Retail $8.99</span><span class="mk">+$5.07 · 56%</span></div></div></div>
+        <div class="prow"><img class="pimg" src="../img/lfg-cinnamon.png" alt=""><div class="pinfo"><div class="pn">Cinnamon<small>A full 200mg extract · 0.5 fl oz</small></div><div class="nums"><span class="c">Cost $6.75 → Retail $13.99</span><span class="mk">+$7.24 · 52%</span></div></div></div>
         <div class="note">✓ Third-party lab-tested · no added 7-OH · state-lab COA (Strawberry Watermelon)</div>
       </div>
     </div>
