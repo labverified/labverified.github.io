@@ -1,17 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- Hallmark · redesign · genre: atmospheric · treatment: dark/light glassmorphism + theme toggle
+     pre-emit critique: P5 H5 E4 S5 R4 V4 · theme: charcoal-green / mint paper · emerald accent · Space Grotesk + Inter -->
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Product Verification</title>
+<meta name="theme-color" content="#070b0e">
+<title>Lab Verified — Independent Testing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{background:#111114;color:#c9c9d2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center;padding:24px}
-  p{font-size:15px;line-height:1.6;max-width:380px}
+  :root{
+    /* fonts + geometry (theme-independent) */
+    --font-d:"Space Grotesk",-apple-system,system-ui,sans-serif;
+    --font-b:"Inter",-apple-system,system-ui,sans-serif;
+    --r:20px; --ease:cubic-bezier(.22,.61,.36,1);
+    /* verified emerald emblem — bright in BOTH themes (dark check reads on it) */
+    --seal1:#4fe08f; --seal2:#17a258; --seal-ink:#04160c;
+  }
+  /* ---------- DARK (default) ---------- */
+  :root, :root[data-theme="dark"]{
+    --ink:#eef4f1; --mut:#9fb2ab; --dim:#6f827c;
+    --acc:#3ee08a; --gold:#e7c672;
+    --atmos:
+      radial-gradient(60% 42% at 78% -4%, rgba(62,224,138,.20), transparent 70%),
+      radial-gradient(66% 40% at 8% 8%, rgba(30,120,190,.16), transparent 68%),
+      radial-gradient(80% 50% at 50% 108%, rgba(15,122,57,.22), transparent 72%),
+      linear-gradient(180deg,#070b0e,#0a1116);
+    --grain-op:.5;
+    --glass:rgba(255,255,255,.055); --brd:rgba(255,255,255,.12); --hi:rgba(255,255,255,.16);
+    --gshadow:0 20px 50px -20px rgba(0,0,0,.7);
+    --hair:rgba(255,255,255,.08);
+    --ck-bg:rgba(62,224,138,.22); --ck-brd:rgba(62,224,138,.45);
+    --chip:rgba(255,255,255,.9); --chip-brd:rgba(255,255,255,.55);
+    --tx-bg:linear-gradient(160deg,rgba(52,96,170,.2),rgba(22,44,90,.12)); --tx-brd:rgba(110,160,230,.36); --tx-h:#d3e4ff; --tx-star:#8fbcf5;
+    --age-brd:rgba(231,198,114,.5);
+    --promise-bg:linear-gradient(160deg,rgba(62,224,138,.14),rgba(15,122,57,.08));
+    --promise-brd:rgba(62,224,138,.32);
+    --theme-color:#070b0e;
+  }
+  /* ---------- LIGHT ---------- */
+  :root[data-theme="light"]{
+    --ink:#0c1a13; --mut:#4f6259; --dim:#7c8d84;
+    --acc:#0c8a49; --gold:#b0851d;
+    --atmos:
+      radial-gradient(60% 42% at 80% -6%, rgba(15,157,85,.18), transparent 70%),
+      radial-gradient(62% 40% at 6% 6%, rgba(30,140,190,.10), transparent 68%),
+      radial-gradient(85% 52% at 50% 110%, rgba(15,122,57,.14), transparent 72%),
+      linear-gradient(180deg,#eef5f0,#dfece5);
+    --grain-op:.10;
+    --glass:rgba(255,255,255,.6); --brd:rgba(18,54,38,.12); --hi:rgba(255,255,255,.85);
+    --gshadow:0 18px 40px -18px rgba(20,55,38,.28);
+    --hair:rgba(14,40,26,.1);
+    --ck-bg:rgba(15,157,85,.14); --ck-brd:rgba(15,157,85,.4);
+    --chip:#ffffff; --chip-brd:rgba(14,40,26,.12);
+    --tx-bg:linear-gradient(160deg,rgba(40,80,150,.12),rgba(30,60,120,.055)); --tx-brd:rgba(30,70,140,.3); --tx-h:#123a72; --tx-star:#1e5bb0;
+    --age-brd:rgba(176,133,29,.55);
+    --promise-bg:linear-gradient(160deg,rgba(15,157,85,.14),rgba(15,122,57,.06));
+    --promise-brd:rgba(15,157,85,.34);
+    --theme-color:#eef5f0;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:clip}
+  body{ background:#070b0e; color:var(--ink); font-family:var(--font-b);
+        -webkit-font-smoothing:antialiased; line-height:1.5; overflow-wrap:anywhere; min-width:0; position:relative;
+        transition:color .3s var(--ease); }
+  .atmos{ position:fixed; inset:0; z-index:0; pointer-events:none; background:var(--atmos); transition:background .3s var(--ease); }
+  .grain{ position:fixed; inset:0; z-index:1; pointer-events:none; opacity:var(--grain-op); mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E"); }
+
+  .wrap{ position:relative; z-index:2; max-width:600px; margin:0 auto; padding:20px 20px 40px; }
+
+  .rise{ opacity:0; transform:translateY(14px); animation:rise .7s var(--ease) forwards; }
+  .d1{animation-delay:.08s}.d2{animation-delay:.14s}.d3{animation-delay:.2s}.d4{animation-delay:.26s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){ .rise{animation:none;opacity:1;transform:none} *{transition:none!important} }
+
+  .glass{ background:var(--glass); -webkit-backdrop-filter:blur(26px) saturate(150%); backdrop-filter:blur(26px) saturate(150%);
+          border:1px solid var(--brd); border-radius:var(--r);
+          box-shadow:var(--gshadow), inset 0 1px 0 var(--hi);
+          transition:background .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); }
+
+  /* header bar */
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 16px 15px 18px; margin-bottom:26px; }
+  .mk{ display:flex; align-items:center; gap:12px; min-width:0; }
+  .mk .seal{ width:44px; height:44px; border-radius:12px; flex:0 0 auto; position:relative;
+    background:linear-gradient(150deg,var(--seal1),var(--seal2)); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 22px rgba(62,224,138,.45), inset 0 1px 0 rgba(255,255,255,.5); }
+  .mk .seal svg{ width:24px; height:24px; }
+  .mk .nm{ font-family:var(--font-d); font-weight:700; font-size:20px; letter-spacing:.01em; line-height:1; }
+  .mk .nm b{ color:var(--acc); }
+  .mk .tg{ font-size:11.5px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--mut); margin-top:5px; }
+  .rt{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
+  .tgl{ width:44px; height:44px; border-radius:12px; flex:0 0 auto; cursor:pointer;
+        background:var(--glass); border:1px solid var(--brd); box-shadow:inset 0 1px 0 var(--hi);
+        -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px);
+        display:flex; align-items:center; justify-content:center; color:var(--acc);
+        transition:transform .18s var(--ease), border-color .18s var(--ease); }
+  .tgl:hover{ transform:translateY(-1px); border-color:var(--acc); }
+  .tgl:focus-visible{ outline:2px solid var(--acc); outline-offset:2px; }
+  .tgl svg{ width:22px; height:22px; }
+  .tgl .moon{ display:none; } :root[data-theme="light"] .tgl .sun{ display:none; } :root[data-theme="light"] .tgl .moon{ display:block; }
+  .age{ font-family:var(--font-d); font-size:15px; font-weight:600; color:var(--gold);
+        border:1.5px solid var(--age-brd); border-radius:999px; padding:6px 14px; letter-spacing:.02em; }
+
+  .hero{ padding:6px 6px 4px; }
+  .eyebrow{ font-size:13px; font-weight:700; letter-spacing:.26em; text-transform:uppercase; color:var(--acc); }
+  .head{ font-family:var(--font-d); font-weight:700; font-size:clamp(37px,11.6vw,48px); line-height:1.02; letter-spacing:-.025em; margin-top:14px; }
+  .head em{ font-style:normal; background:linear-gradient(120deg,var(--acc),var(--seal1) 55%,var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .lede{ margin-top:18px; font-size:18px; line-height:1.5; color:var(--mut); }
+  .lede b{ color:var(--ink); font-weight:600; }
+
+  .focal{ display:flex; align-items:center; gap:20px; margin-top:26px; padding:22px 24px; }
+  .bigseal{ flex:0 0 auto; width:92px; height:92px; border-radius:50%; position:relative;
+    background:radial-gradient(circle at 38% 30%, #6bf0a8, var(--seal1) 42%, var(--seal2) 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 8px rgba(62,224,138,.1), 0 0 40px rgba(62,224,138,.45), inset 0 2px 3px rgba(255,255,255,.6); }
+  .bigseal::before{ content:""; position:absolute; inset:9px; border-radius:50%; border:2px dashed rgba(4,30,15,.4); }
+  .bigseal svg{ width:48px; height:48px; }
+  .focal .ft h3{ font-family:var(--font-d); font-weight:700; font-size:23px; letter-spacing:-.01em; line-height:1.1; }
+  .focal .ft p{ margin-top:7px; font-size:15.5px; color:var(--mut); line-height:1.4; }
+
+  .lbl{ font-size:12.5px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin:30px 6px 14px; }
+
+  .list{ padding:6px 22px; }
+  .row{ display:flex; gap:16px; align-items:flex-start; padding:19px 0; border-bottom:1px solid var(--hair); }
+  .row:last-child{ border-bottom:none; }
+  .row .ck{ flex:0 0 auto; width:34px; height:34px; border-radius:50%; margin-top:1px; color:var(--acc);
+    background:var(--ck-bg); border:1px solid var(--ck-brd); display:flex; align-items:center; justify-content:center; }
+  .row .ck svg{ width:18px; height:18px; }
+  .row .k{ font-family:var(--font-d); font-size:18px; font-weight:600; letter-spacing:-.01em; }
+  .row .v{ font-size:15px; color:var(--mut); margin-top:3px; line-height:1.4; }
+
+  .rbtn{ display:flex; align-items:center; gap:15px; padding:16px 18px; margin-bottom:12px; text-decoration:none; color:var(--ink);
+         transition:transform .18s var(--ease), border-color .18s var(--ease), background .3s var(--ease); }
+  .rbtn:hover{ transform:translateY(-2px); border-color:var(--acc); }
+  .rbtn:active{ transform:translateY(0); }
+  .rbtn:focus-visible{ outline:2px solid var(--acc); outline-offset:3px; }
+  .rbtn .ic{ flex:0 0 auto; width:52px; height:66px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    background:var(--chip); border:1px solid var(--chip-brd); box-shadow:inset 0 1px 0 rgba(255,255,255,.5); padding:6px 5px; overflow:hidden; }
+  .rbtn .ic img{ max-height:100%; max-width:100%; width:auto; object-fit:contain; display:block; filter:drop-shadow(0 2px 4px rgba(0,0,0,.28)); }
+  .rbtn .rl{ display:block; font-family:var(--font-d); font-size:18px; font-weight:600; line-height:1.15; }
+  .rbtn .rs{ display:block; font-size:13.5px; color:var(--mut); margin-top:2px; }
+  .rbtn .arw{ margin-left:auto; color:var(--acc); font-size:24px; font-weight:700; line-height:1; }
+
+  /* Texas compliance block */
+  .tx{ margin-top:26px; padding:24px 24px 20px; border:1px solid var(--tx-brd); background:var(--tx-bg); }
+  .txhead{ display:flex; align-items:center; gap:14px; }
+  .txhead .star{ width:46px; height:46px; border-radius:12px; flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+    font-size:26px; color:var(--tx-star); background:rgba(255,255,255,.06); border:1px solid var(--tx-brd); box-shadow:inset 0 1px 0 rgba(255,255,255,.16); }
+  .txhead h3{ font-family:var(--font-d); font-weight:700; font-size:21px; letter-spacing:-.01em; color:var(--tx-h); line-height:1.1; }
+  .txpts{ margin-top:16px; display:flex; flex-direction:column; gap:12px; }
+  .txp{ display:flex; gap:12px; align-items:flex-start; font-size:15.5px; color:var(--ink); line-height:1.4; }
+  .txp .c{ flex:0 0 auto; width:22px; height:22px; color:var(--acc); margin-top:1px; }
+  .txp b{ font-weight:600; }
+  .txfine{ margin-top:16px; padding-top:14px; border-top:1px solid var(--hair); font-size:12.5px; line-height:1.55; color:var(--dim); }
+  .promise{ margin-top:26px; padding:28px 26px; text-align:center; position:relative; overflow:hidden;
+            border:1px solid var(--promise-brd); background:var(--promise-bg); }
+  .promise .pm{ font-family:var(--font-d); font-weight:700; font-size:clamp(26px,8vw,30px); letter-spacing:-.02em; }
+  .promise .ps{ margin-top:10px; font-size:16px; color:var(--mut); line-height:1.5; max-width:420px; margin-left:auto; margin-right:auto; }
+  .promise .ps b{ color:var(--ink); font-weight:600; }
+
+  .foot{ margin-top:30px; padding:0 6px; }
+  .foot .row2{ display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+  .foot .age2{ font-family:var(--font-d); font-size:13px; font-weight:700; letter-spacing:.05em; color:var(--seal-ink);
+    background:var(--gold); border-radius:6px; padding:4px 10px; }
+  .foot .pnp{ font-family:var(--font-d); font-size:13.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--acc); }
+  .foot .disc{ font-size:12.5px; line-height:1.55; color:var(--dim); }
 </style>
 </head>
 <body>
-  <p>Product verification pages are reached by scanning the code on the product's counter card. MUST BE 21+.</p>
+  <div class="atmos"></div><div class="grain"></div>
+  <div class="wrap">
+
+    <div class="topbar glass rise">
+      <div class="mk">
+        <span class="seal"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#04160c" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div class="nm">Lab&nbsp;<b>Verified</b></div><div class="tg">Independent 3rd-party testing</div></div>
+      </div>
+      <div class="rt">
+        <button class="tgl" id="tgl" type="button" aria-label="Toggle light or dark mode">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 106.16 15.9 7 7 0 004.84-4.9z"/></svg>
+        </button>
+        <span class="age">21+</span>
+      </div>
+    </div>
+
+    <div class="hero rise d1">
+      <div class="eyebrow">Before you buy any shot</div>
+      <h1 class="head">Know exactly what&rsquo;s <em>inside.</em></h1>
+      <p class="lede">Most shots on the shelf can&rsquo;t show you a single lab report. <b>Every one on this rack can.</b></p>
+    </div>
+
+    <div class="focal glass rise d2">
+      <span class="bigseal"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#04160c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div class="ft"><h3>Independently tested.<br>Openly shared.</h3><p>Real, accredited lab reports &mdash; free for you to read.</p></div>
+    </div>
+
+    <div class="lbl">What every report confirms</div>
+    <div class="list glass rise d3">
+      <div class="row"><span class="ck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div class="k">Third-party lab tested</div><div class="v">Analyzed at an independent, accredited ISO&nbsp;17025 lab.</div></div></div>
+      <div class="row"><span class="ck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div class="k">The real potency</div><div class="v">The actual numbers, verified &mdash; not marketing estimates.</div></div></div>
+      <div class="row"><span class="ck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div class="k">Natural leaf kratom</div><div class="v">No synthetic or added 7-hydroxymitragynine (7-OH).</div></div></div>
+      <div class="row"><span class="ck"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div class="k">The document itself</div><div class="v">The full Certificate of Analysis is linked below.</div></div></div>
+    </div>
+
+    <div class="tx glass rise">
+      <div class="txhead">
+        <span class="star">&#9733;</span>
+        <h3>Compliant for sale in Texas</h3>
+      </div>
+      <div class="txpts">
+        <div class="txp"><svg class="c" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Natural leaf kratom</b> &mdash; legal under Texas Health &amp; Safety Code Ch.&nbsp;444 (Kratom Consumer Protection Act).</span></div>
+        <div class="txp"><svg class="c" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>No synthetic or added 7-OH</b> &mdash; within Texas limits; every product&rsquo;s 7-OH is on its COA above.</span></div>
+        <div class="txp"><svg class="c" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Sold to adults 21+</b>, in compliance with applicable Texas law.</span></div>
+      </div>
+      <div class="txfine">Reflects Texas law as of August&nbsp;2026. Recent Texas and federal 7-OH restrictions target concentrated or semi-synthetic products &mdash; not natural leaf kratom. Provided for information; not legal advice.</div>
+    </div>
+
+    <div class="lbl">Read the reports by brand</div>
+    <div class="rise d4">
+      <a class="rbtn glass" href="https://labverified.github.io/lit/" target="_blank" rel="noopener"><span class="ic"><img src="img/lit-watermelon.png" alt="LIT Culture"></span><span><span class="rl">LIT Culture</span><span class="rs">Sourcing &amp; accredited COAs</span></span><span class="arw">&rsaquo;</span></a>
+      <a class="rbtn glass" href="https://labverified.github.io/lfg/" target="_blank" rel="noopener"><span class="ic"><img src="img/lfg-sw.png" alt="LFG"></span><span><span class="rl">LFG</span><span class="rs">Sourcing &amp; lab reports</span></span><span class="arw">&rsaquo;</span></a>
+      <a class="rbtn glass" href="https://labverified.github.io/superfeels/" target="_blank" rel="noopener"><span class="ic"><img src="img/superfeels.png" alt="Super Feels"></span><span><span class="rl">Super Feels</span><span class="rs">Kava + kratom tonic &mdash; ISO 17025 COA</span></span><span class="arw">&rsaquo;</span></a>
+      <a class="rbtn glass" href="https://labverified.github.io/chant/" target="_blank" rel="noopener"><span class="ic"><img src="img/chant-platinum.png" alt="Chant Life"></span><span><span class="rl">Chant Life</span><span class="rs">Accredited COAs &amp; testing</span></span><span class="arw">&rsaquo;</span></a>
+    </div>
+
+    <div class="promise glass">
+      <div class="pm">Proof, not promises.</div>
+      <div class="ps">Every one is third-party lab tested, and <b>the real report is right here</b> to back it up.</div>
+    </div>
+
+    <div class="foot">
+      <div class="row2"><span class="age2">MUST BE 21+</span><span class="pnp">Independently Lab Verified</span></div>
+      <div class="disc">Natural leaf kratom, sold to adults 21+. Potency, 7-OH, and contaminant results come from independent accredited Certificates of Analysis; tap a brand above to view the full reports. Contaminant panels vary by product &mdash; see each brand&rsquo;s COA for its specific results. These statements have not been evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease.</div>
+    </div>
+
+  </div>
+  <script>
+    (function(){
+      var root=document.documentElement, tc=document.querySelector('meta[name="theme-color"]');
+      var saved=null; try{saved=localStorage.getItem('lv-theme');}catch(e){}
+      function apply(t){ root.setAttribute('data-theme',t);
+        if(tc){ tc.setAttribute('content', getComputedStyle(root).getPropertyValue('--theme-color').trim()||'#070b0e'); } }
+      apply(saved==='light'||saved==='dark' ? saved : 'dark');
+      document.getElementById('tgl').addEventListener('click',function(){
+        var t=root.getAttribute('data-theme')==='light'?'dark':'light';
+        apply(t); try{localStorage.setItem('lv-theme',t);}catch(e){}
+      });
+    })();
+  </script>
 </body>
 </html>
