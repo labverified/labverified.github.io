@@ -251,6 +251,31 @@
     .vname{font-size:12px;}
     .vval{font-size:12px;}
   }
+
+  /* PRINT: flip to a clean white leave-behind, force color fills, keep cards whole */
+  @media print{
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+    :root{
+      --ink:#151b27;--muted:#48546a;--faint:#6a7688;
+      --glass:#ffffff;--glass-2:#f3f5f9;--glass-brd:#d3dae4;--glass-hi:transparent;--stroke:#e5e9f0;
+      --verified:#0c7a3a;--verified-dim:#e9f6ef;--danger:#c22a20;--danger-dim:#fbeeec;
+      --gold:#946716;--gold-dim:#f6eeda;--shadow:none;
+    }
+    body{background:#fff !important;}
+    .wrap{max-width:100% !important;padding:0 !important;gap:10px !important;}
+    .glass{background:#fff !important;border:1px solid var(--glass-brd) !important;box-shadow:none !important;
+      border-radius:12px !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+    .glass::before{display:none !important;}
+    section{margin:0 !important;}
+    .hero,.panel,.protect,.cta{break-inside:avoid;}
+    tbody tr,.vrow,.risk,.bogo,.facts li{break-inside:avoid;}
+    h1{color:var(--ink) !important;}
+    h1 .em{-webkit-text-fill-color:#0c7a3a !important;color:#0c7a3a !important;background:none !important;}
+    thead th{color:var(--muted) !important;} thead th.ours{color:var(--verified) !important;}
+    .order{box-shadow:none !important;}
+    a[href]{text-decoration:none !important;}
+    @page{margin:12mm;}
+  }
 </style>
 </head>
 <body>
